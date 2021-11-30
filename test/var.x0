@@ -1,0 +1,16 @@
+main {
+    int i;
+    int a, b, t;
+    i = 0;
+    a = 1;
+    b = 1;
+    while (i < 10) {
+        t = a;
+        a = a + b;
+        b = t;
+        i = i + 1;
+        write i;
+        write a;
+    }
+    
+}

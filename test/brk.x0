@@ -1,0 +1,17 @@
+main {
+    int i, a, b;
+    i = 0;
+    while (1) {
+        if (i >= 10) break;
+        a = i * i;
+        i = i + 1;
+        write a;
+    }
+
+    do {
+        if (i > 20) break;
+        b = i + 1;
+        i = i + 1;
+        write b;
+    } while (1);
+}

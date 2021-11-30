@@ -1,0 +1,3 @@
+ 0: name=a, lev=0 type=int addr=3 is_arr=0
+ 1: name=b, lev=0 type=int addr=4 is_arr=0
+ 2: name=x, lev=0 type=int addr=5 is_arr=0

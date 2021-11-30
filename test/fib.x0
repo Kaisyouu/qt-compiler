@@ -1,0 +1,17 @@
+main {
+    int i;
+    int fib[3];
+    i = 0;
+    fib[0] = 1;
+    fib[1] = 1;
+    while (i < 10) {
+        fib[2] = fib[0];
+        fib[0] = fib[0] + fib[1]; // multiple array reference not supported
+        /* if array as lvalue, all rvalues should be var or const, no array */
+        fib[1] = fib[2];
+        i = i + 1;
+        write i;
+        write fib[0];
+    }
+    
+}

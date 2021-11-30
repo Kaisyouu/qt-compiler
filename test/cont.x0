@@ -1,0 +1,16 @@
+main {
+    int i;
+    i = 0;
+    while (i < 10) {
+        i = i + 1;
+        if (i < 5) continue;
+        write i;
+    }
+
+    do {
+        i = i + 1;
+        if (i < 15) continue;
+        write i;
+        if (i == 20) continue;
+    } while (i < 20);
+}

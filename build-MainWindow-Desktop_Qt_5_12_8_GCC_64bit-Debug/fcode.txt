@@ -1,0 +1,17 @@
+10 int 0 6
+11 lod 0 3
+12 lit 0 1
+13 sto 0 3
+14 lod 0 4
+15 lit 0 2
+16 sto 0 4
+17 lod 0 5
+18 lod 0 3
+19 lod 0 4
+20 opr 0 2  # +
+21 lod 0 3
+22 opr 0 2  # +
+23 sto 0 5
+24 lod 0 5
+25 opr 0 14  # writ
+26 jmp 0 0
