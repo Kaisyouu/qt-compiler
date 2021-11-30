@@ -1,13 +1,9 @@
-main{
-	int a,b,x;
-	a=1;
-	b=2;
-	x=a+b+a;
-	write x;
-}
- x;
-}
-   b = 1;
+main {
+    int i;
+    int a, b, t;
+    i = 0;
+    a = 1;
+    b = 1;
     while (i < 10) {
         t = a;
         a = a + b;
@@ -16,5 +12,9 @@ main{
         write i;
         write a;
     }
+}
+  
+}
+}
     
 }

@@ -2276,7 +2276,7 @@ void interpret() {
     int s[stacksize];     /* 栈 */
 
     printf("Start pl0\n");
-    fprintf(fresult, "Start pl0\n");
+    //fprintf(fresult, "Start pl0\n");
     s[0] = 0; /* s[0]不用 */
     s[1] = 0; /* 主程序的三个联系单元均置为0 */
     s[2] = 0;
@@ -2420,7 +2420,7 @@ void interpret() {
         }
     } while (p != 0);
     printf("End pl0\n");
-    fprintf(fresult, "\nEnd pl0\n");
+    //fprintf(fresult, "\nEnd pl0\n");
 }
 
 /* 通过过程基址求上l层过程的基址 */
@@ -2645,12 +2645,14 @@ void displaytable() {
             switch (table[i].kind) {
                 case e_var:
                     buf[0] = '\0';
-                    sappendf(buf, "%2d: name=%s, lev=%d", i, table[i].name, table[i].level);
-                    sappendf(buf, " type=%s", sym_type_name[table[i].e_var.type]);
-                    sappendf(buf, " addr=%d", table[i].e_var.addr);
-                    sappendf(buf, " is_arr=%d", table[i].e_var.is_arr);
+                    sappendf(buf, "%s %d", table[i].name, table[i].level);
+                    sappendf(buf, " %s", sym_type_name[table[i].e_var.type]);
+                    sappendf(buf, " %d", table[i].e_var.addr);
+                    sappendf(buf, " %d", table[i].e_var.is_arr);
                     if (table[i].e_var.is_arr) 
-                        sappendf(buf, " arrlen=%d", table[i].e_var.arrlen);
+                        sappendf(buf, " %d", table[i].e_var.arrlen);
+                    else
+                        sappendf(buf, " null");
                     sappendf(buf, "\n");
                     printf("%s", buf);
                     fprintf(ftable, "%s", buf);

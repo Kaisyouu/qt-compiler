@@ -1,17 +1,36 @@
-10 int 0 6
+10 int 0 7
 11 lod 0 3
-12 lit 0 1
+12 lit 0 0
 13 sto 0 3
 14 lod 0 4
-15 lit 0 2
+15 lit 0 1
 16 sto 0 4
 17 lod 0 5
-18 lod 0 3
-19 lod 0 4
-20 opr 0 2  # +
-21 lod 0 3
-22 opr 0 2  # +
-23 sto 0 5
-24 lod 0 5
-25 opr 0 14  # writ
-26 jmp 0 0
+18 lit 0 1
+19 sto 0 5
+20 lod 0 3
+21 lit 0 10
+22 opr 0 10  # <
+23 jpc 0 45
+24 lod 0 6
+25 lod 0 4
+26 sto 0 6
+27 lod 0 4
+28 lod 0 4
+29 lod 0 5
+30 opr 0 2  # +
+31 sto 0 4
+32 lod 0 5
+33 lod 0 6
+34 sto 0 5
+35 lod 0 3
+36 lod 0 3
+37 lit 0 1
+38 opr 0 2  # +
+39 sto 0 3
+40 lod 0 3
+41 opr 0 14  # writ
+42 lod 0 4
+43 opr 0 14  # writ
+44 jmp 0 20
+45 jmp 0 0
