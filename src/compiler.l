@@ -35,25 +35,19 @@ void block_comment();
 %}
 %option yylineno
 
-/* \w */
 bsw     [A-Za-z_0-9]
-/* \d */
 bsd     [0-9]
-/* alpha or _ */
 al_     [A-Za-z_]
 
 %%
 
 
- /* white space */
 [ \t\r\n]+  { ; }
+[+\-*/%^&|~!]   { return *yytext; } 
+[\(\)\[\]\{\}\<\>]      { return *yytext; } 
+[,\.=;:?"']     { return *yytext; } 
 
- /* single character operators or delimiters */
-[+\-*/%^&|~!]   { return *yytext; } /* operators */
-[\(\)\[\]\{\}\<\>]      { return *yytext; } /* braces */
-[,\.=;:?"']     { return *yytext; } /* others */
 
- /* multiple character operators */
 "<="    { return T_LE; }
 ">="    { return T_GE; }
 "=="    { return T_EQ; }
@@ -61,7 +55,7 @@ al_     [A-Za-z_]
 "&&"    { return T_AND; }
 "||"    { return T_OR; }
 
- /* keywords */
+
 "if"        { return T_IF; }
 "else"      { return T_ELSE; }
 
@@ -77,15 +71,16 @@ al_     [A-Za-z_]
 "true"      { return T_TRUE; }
 "false"     { return T_FALSE; }
 
- /* primitive types */
+
 "int"       { return T_INT; }
 "char"      { return T_CHAR; }
+"bool"      { return T_BOOL; }
 
- /* number and variable */
+
 {bsd}+(\.{bsd}+)?   { yylval.number = atoi(yytext); return T_NUM; }
 {al_}{bsw}*         { yylval.string = strdup(yytext); return T_IDENT; }
 
- /* comments */
+
 "//"    { line_comment(); }
 "/*"    { block_comment(); }
 %%

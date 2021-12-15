@@ -19,7 +19,6 @@ list_it list_begin(list_t l);
 list_it list_end(list_t l);
 void list_it_next(list_it *it);
 
-// do not append in for_list
 #define for_list(it, list) \
     for (list_it it = list_begin(list), _e = list_end(list); it != _e; list_it_next(&it))
 
@@ -35,7 +34,8 @@ enum fct {
 
 /* 虚拟机代码结构 */
 struct instruction {
-    enum fct f; /* function code. 虚拟机代码指令 */
+    enum fct f; /* function code. 虚拟机代码
+    指令 */
     int l;      /* level. 引用层与声明层的层次差 */
     int a;      /* displacement address. 根据f的不同而不同 */
 };
@@ -54,6 +54,7 @@ enum sym_type {
     sym_unknown,
     sym_char,
     sym_int,
+    sym_bool
 };
 
 struct var_entry {
@@ -128,6 +129,7 @@ void cgadd() { gen(opr, 0, 2); }
 void cgsub() { gen(opr, 0, 3); }
 void cgmul() { gen(opr, 0, 4); }
 void cgdiv() { gen(opr, 0, 5); }
+void cgmod() { gen(opr, 0, 19); }
 void cglnot() { gen(opr, 0, 7); }
 void cgeq() { gen(opr, 0, 8); }
 void cgne() { gen(opr, 0, 9); }
@@ -170,7 +172,7 @@ int get_local_size();
 %token T_BREAK T_CONTINUE
 %token T_MAIN T_READ T_WRITE
 %token T_TRUE T_FALSE
-%token T_INT T_CHAR
+%token T_INT T_CHAR T_BOOL
 %nonassoc P_IFX
 %nonassoc T_ELSE
 
@@ -180,7 +182,7 @@ int get_local_size();
 %left T_EQ T_NE
 %left '<' '>' T_LE T_GE
 %left '+' '-'
-%left '*' '/'
+%left '*' '/' '%'
 
 %token <number> T_NUM
 %token <string> T_IDENT
@@ -215,6 +217,7 @@ decl_stat
 decl_spec
     : T_INT     { $$ = sym_int; }
     | T_CHAR    { $$ = sym_char; }
+    | T_BOOL    { $$ = sym_bool; }
     ;
 
 init_decl_list
@@ -369,6 +372,7 @@ expr
     | expr '/' expr     { cgdiv(); }
     | expr '+' expr     { cgadd(); }
     | expr '-' expr     { cgsub(); }
+    | expr '%' expr     { cgmod(); }
 
     | expr '<' expr     { cglt(); }
     | expr '>' expr     { cggt(); }
@@ -541,7 +545,7 @@ void interpret() {
                         break;
                     case 14: /* 栈顶值输出 */
                         printf("%d\n", s[t]);
-                        fprintf(fresult, "%d", s[t]);
+                        fprintf(fresult, "%d\n", s[t]);
                         t = t - 1;
                         break;
                     case 15: /* 输出换行符 */
@@ -553,7 +557,7 @@ void interpret() {
                         printf("?");
                         fprintf(fresult, "?");
                         scanf("%d", &(s[t]));
-                        fprintf(fresult, "%d\n", s[t]);
+                        fprintf(fresult, "%d", s[t]);
                         break;
                     case 17: /* AND */
                         t = t - 1;
@@ -562,6 +566,10 @@ void interpret() {
                     case 18: /* OR */
                         t = t - 1;
                         s[t] = s[t] || s[t + 1];
+                        break;
+                    case 19: /* MOD */
+                        t = t - 1;
+                        s[t] = s[t] % s[t + 1];
                         break;
                     default:
                         fatal("unrecognized opr");
@@ -612,7 +620,7 @@ void interpret() {
         }
     } while (p != 0);
     printf("End pl0\n");
-    //fprintf(fresult, "\nEnd pl0\n");
+    /* fprintf(fresult, "\n\n"); */
 }
 
 /* 通过过程基址求上l层过程的基址 */
@@ -829,6 +837,7 @@ void displaytable() {
         {"?"},
         {"char"},
         {"int"},
+        {"bool"}
     };
     if (tableswitch) { /* 输出符号表 */
         char buf[500];

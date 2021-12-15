@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->setColumnWidth(4,30);
     ui->tableView->setColumnWidth(5,30);
 
-    model->setItem(0, 0, new QStandardItem("a00"));
+//    model->setItem(0, 0, new QStandardItem("a00"));
 }
 
 MainWindow::~MainWindow()

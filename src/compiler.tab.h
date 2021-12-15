@@ -62,15 +62,16 @@ extern int yydebug;
     T_FALSE = 268,
     T_INT = 269,
     T_CHAR = 270,
-    P_IFX = 271,
-    T_OR = 272,
-    T_AND = 273,
-    T_EQ = 274,
-    T_NE = 275,
-    T_LE = 276,
-    T_GE = 277,
-    T_NUM = 278,
-    T_IDENT = 279
+    T_BOOL = 271,
+    P_IFX = 272,
+    T_OR = 273,
+    T_AND = 274,
+    T_EQ = 275,
+    T_NE = 276,
+    T_LE = 277,
+    T_GE = 278,
+    T_NUM = 279,
+    T_IDENT = 280
   };
 #endif
 
@@ -78,7 +79,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 158 "compiler.y"
+#line 160 "compiler.y"
 
     int number;
     char *string;
@@ -88,7 +89,7 @@ union YYSTYPE
     enum sym_type type;
     a_lval_t lval;
 
-#line 92 "compiler.tab.h"
+#line 93 "compiler.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

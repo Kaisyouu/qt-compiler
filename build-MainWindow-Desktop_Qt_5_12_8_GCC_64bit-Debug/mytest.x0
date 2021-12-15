@@ -1,20 +1,30 @@
 main {
     int i;
-    int a, b, t;
     i = 0;
-    a = 1;
-    b = 1;
     while (i < 10) {
-        t = a;
-        a = a + b;
-        b = t;
         i = i + 1;
+        if (i < 5) continue;
         write i;
-        write a;
     }
+
+    do {
+        i = i + 1;
+        if (i < 15) continue;
+        write i;
+        if (i == 20) continue;
+    } while (i < 20);
 }
-  
+   }
+            j = j+1;
+        }
+        if(flag == 1) write i;
+        i = i + 1;
+    }
+    
 }
+
 }
+ib[0];
+    }
     
 }

@@ -1,0 +1,16 @@
+main{
+	int n1, n2, i, gcd;
+	n1=120;
+	n2=180;
+	i=1;
+	while(i<=n1 && i<=n2)
+	{
+		if (n1%i==0 && n2%i==0)
+		{
+			gcd=i;
+		}
+		i=i+1;
+
+	}
+	write(gcd);
+}

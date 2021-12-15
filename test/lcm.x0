@@ -1,0 +1,12 @@
+main {
+	int n1,n2,i,lcm;
+	n1=24;
+	n2=36;
+	lcm=n2;
+	while(1)
+	{
+		if (lcm%n1==0 && lcm%n2==0) break;
+		lcm=lcm+1;
+	}
+	write lcm;
+}
